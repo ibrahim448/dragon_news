@@ -1,8 +1,12 @@
 import { Link, NavLink } from "react-router-dom";
 import classes from "./Navbar.module.css";
 import { FaBars } from "react-icons/fa6";
+import { useState } from "react";
 
 const Navbar = () => {
+
+    const [openMenu, setOpenMenu] = useState(false)
+
   return (
     <>
       <nav>
@@ -27,8 +31,25 @@ const Navbar = () => {
                 </li>
               </ul>
             </div>
-            <div className={classes.menuBar}>
-              <span><FaBars /></span>
+            <div className={classes.menuBar} onClick={()=> setOpenMenu(!openMenu)}>
+              {
+                openMenu ? <>
+                 <ul>
+                <li>
+                  <NavLink to="/" className={(active)=> active.isActive?classes.active:null}>Home</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/about" className={(active)=> active.isActive?classes.active:null}>About</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/login" className={(active)=> active.isActive?classes.active:null}>Login</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/sign-up" className={(active)=> active.isActive?classes.active:null}>SignUp</NavLink>
+                </li>
+              </ul>
+                </>:<span><FaBars /></span>
+              }
             </div>
           </div>
         </div>
